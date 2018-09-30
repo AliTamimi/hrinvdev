@@ -1,7 +1,31 @@
 <h4>Company List</h4>
-
+<%= link_to 'New Company', new_company_path %><br>
 <% @company.each do |x| %>
 
-<%= x.name %><br>
+<td><%= x.name %></td>
+<td><%= x.code %></td>
+<td class="<%= x.id %>"><%= x.active %></td>
+<td class="<%= x.id %>"><%= x.active.present? ? 'checked' : 'unchecked' %></td>
+<td class="active_<%= x.id%>"><%= is_active(x) %></td>
+<td><%= check_box_tag "x[#{x.id}]", 'true', x.active, class: 'check_box' %></td>
+
+<br>
 
 <% end %>
+
+<script>
+
+$( "input[type=checkbox]" ).on( "click", function(){
+alert($(this).prop( "checked" ))
+val = $(this).prop( "checked" )
+id =  $(this).attr( "id" ).split("_")[1]
+alert(id)
+  $.ajax({
+    url: '/company/'+id+'/toggle_active',
+    method: 'get',
+    data: 'status='+val
+  })
+
+});
+
+</script>

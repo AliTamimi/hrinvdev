@@ -1,5 +1,6 @@
 <h1>New Company</h1>
 
 <%= render 'form', company: @company %>
+<%= show_field_error(@company, :name) %>
 
-<%= link_to 'Back', company_path %>
+<%= link_to 'Back', company_index_path %>
