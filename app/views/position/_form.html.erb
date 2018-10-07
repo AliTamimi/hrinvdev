@@ -1,0 +1,22 @@
+<%= form_for @position, url: {action: :create} do |f| %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label :code %>
+    <%= f.text_field :code %><br>
+    <%= f.label :report_to %>
+    <% if @position.higher_level.blank?  %>
+    <%= f.collection_select :report_to, Position.all,:id,:name %><br>
+    <% end %>
+    <% if @position.higher_level.blank?  %>
+    <%= f.collection_select :report_to, Position.where(higher_level: false),:id,:name %>
+    <% end %>
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

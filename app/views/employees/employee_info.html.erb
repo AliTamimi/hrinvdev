@@ -1,0 +1,6 @@
+<h4>my info</h4>
+<%= @employee.id %>
+<%= @employee.name%>
+<%= @employee.company.try(:name) %>
+<%= @employee.department.try(:name) %>
+<%= @employee.position.try(:name) %>

@@ -1,0 +1,6 @@
+<h3>New Employee</h3>
+
+<%= render 'form', employees: @employee %>
+<%= show_field_error(@employee, :name) %>
+
+<%= link_to 'Back', employees_path %>

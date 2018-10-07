@@ -1,0 +1,13 @@
+<%= form_for @department, url: {action: :create} do |f| %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

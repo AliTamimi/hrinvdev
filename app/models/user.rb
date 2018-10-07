@@ -3,5 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  ROLES = ['admin', 'employee']
+  
+  belongs_to :employee, optional: true
+  ROLES = ['admin','Hr', 'Employee']
 end

@@ -1,0 +1,25 @@
+<%= form_for @employee, url: {action: :update} do |f| %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label :nationality %>
+    <%= f.text_field :nationality %><br>
+    <%= f.label :dob %>
+    <%= f.text_field :dob %><br>
+    <%= f.label :join_date %>
+    <%= f.text_field :join_date %><br>
+    <%= f.label :phone %>
+    <%= f.text_field :phone %><br>
+    <%= f.label :department_id %>
+    <%= f.collection_select :department_id, Department.all,:id,:name %><br>
+    <%= f.label :position_id %>
+    <%= f.collection_select :position_id, Position.where(higher_level: false),:id,:name %><br>
+    <%= f.label :custom_report_to %>
+    <%= f.collection_select :custom_report_to, Position.all,:id,:name %><br>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

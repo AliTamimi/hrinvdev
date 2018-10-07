@@ -1,0 +1,13 @@
+<h4>Positions </h4>
+<%= link_to 'New position', new_position_path %><br>
+<% @position.each do |x| %>
+
+<td><%= x.name %></td>
+<td><%= x.code %></td>
+<td><%= x.repoter.try(:name)%></td>
+<td class="<%= x.id %>"><%= x.active %></td>
+<td><%#= check_box_tag "x[#{x.id}]", 'true', x.active, class: 'check_box' %></td>
+
+<br>
+
+<% end %>

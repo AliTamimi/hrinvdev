@@ -1,0 +1,14 @@
+<h4>Department List</h4>
+<%= link_to 'New department', new_department_path %><br>
+<% @department.each do |x| %>
+
+<td><%= x.name %></td>
+<td class="<%= x.id %>"><%= x.active %></td>
+<% x.employees.each do | emp |%>
+<td><%= emp.name %></td>
+<%end %>
+<td><%#= check_box_tag "x[#{x.id}]", 'true', x.active, class: 'check_box' %></td>
+
+<br>
+
+<% end %>
