@@ -5,5 +5,6 @@ class Position < ApplicationRecord
     has_many :employees
     has_many :custom_repotees, class_name: "Employee", :foreign_key => 'custom_report_to'
     has_many :employee_histories
+    has_many :leave_groups
     
 end

@@ -1,5 +1,9 @@
 <h4>Company List</h4>
+<%if current_user.role.role_permissions.where(module_id: 0).first.present? && current_user.role.role_permissions.where(module_id: 0).first.send("create_edit").present?%>
 <%= link_to 'New Company', new_company_path %><br>
+
+<%end%>
+
 <% @company.each do |x| %>
 
 <td><%= x.name %></td>
@@ -7,7 +11,11 @@
 <td class="<%= x.id %>"><%= x.active %></td>
 <td class="<%= x.id %>"><%= x.active.present? ? 'checked' : 'unchecked' %></td>
 <td class="active_<%= x.id%>"><%= is_active(x) %></td>
+<%if current_user.role.role_permissions.where(module_id: 0).first.present? && current_user.role.role_permissions.where(module_id: 0).first.send("create_edit").present?%>
 <td><%= check_box_tag "x[#{x.id}]", 'true', x.active, class: 'check_box' %></td>
+<td><%= link_to 'edit', edit_company_path(x.id) %></td>
+
+<%end%>
 
 <br>
 

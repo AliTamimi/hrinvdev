@@ -1,0 +1,22 @@
+
+<%= form_for @leave_emp_history, url: {action: :create} do |f| %>
+
+<div class="field">
+    
+    <%= f.label :from_day %>
+    <%= f.date_field :from_day %><br>
+    <%= f.label :to_day %>
+    <%= f.date_field :to_day %><br>
+    <%= f.label :leave_type_id %>
+    <%= f.collection_select :leave_type_id, LeaveType.all, :id,:name %><br>
+    <%= f.label :employee_id %>
+    <%= f.collection_select :employee_id, Employee.all, :id,:name %><br>
+    <%= f.hidden_field :leave_status, {value: 0} %><br>
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= show_field_error(@leave_emp_history, :from_day) %>
+<%= show_field_error(@leave_emp_history,  :to_day) %>
+<%= show_field_error(@leave_emp_history,  :leave_type_id) %>

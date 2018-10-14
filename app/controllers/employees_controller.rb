@@ -62,7 +62,8 @@ class EmployeesController < ApplicationController
     
     end
     def verify_user_access
-        restrict_index_path if User::ROLES.index("Employee") == current_user.role_id
+        #restrict_index_path if User::ROLES.index("Employee") == current_user.role_id
+        redirect_to restrict_index_path if User::ROLES.index("Employee") == current_user.role_id
     end
     
     def employee_info

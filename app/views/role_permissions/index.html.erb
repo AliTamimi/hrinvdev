@@ -1,0 +1,15 @@
+<h4>Role Permission</h4>
+<%= link_to 'New Role', new_role_permission_path %><br>
+<% @role_permission.each do |x| %>
+
+<td><%= x.module_id %></td>
+<td><%= x.view %></td>
+<td><%= x.view_all %></td>
+<td><%= x.create_edit %></td>
+<td><%= x.delete_access %></td>
+<td><%= x.approve %></td>
+<td><%= x.role_id %></td>
+
+<br>
+
+<% end %>

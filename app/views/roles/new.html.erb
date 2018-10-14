@@ -1,0 +1,12 @@
+<%= form_for @role, url: {action: :create} do |f| %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

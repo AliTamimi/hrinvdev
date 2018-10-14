@@ -1,0 +1,14 @@
+<%= form_for @leave_group, url: {action: :create} do |f| %>
+
+<div class="field">
+    <%= f.label :days %>
+    <%= f.text_field :days %><br>
+    <%= f.label :leave_type_id %>
+    <%= f.collection_select :leave_type_id, LeaveType.all, :id,:name %><br>
+    <%= f.label :position_id %>
+    <%= f.collection_select :position_id, Position.all, :id,:name %><br>
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

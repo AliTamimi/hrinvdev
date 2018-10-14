@@ -1,0 +1,13 @@
+<h4>Leave types</h4>
+<%= link_to 'New Leave Type', new_leave_type_path %><br>
+<% @leave_type.each do |x| %>
+
+<td><%= x.name %></td>
+<td><%= x.detuct_from_annul %></td>
+<td><%= x.weight %></td>
+<td><%= x.max_days %></td>
+<td><%= x.max_apply %></td>
+
+<br>
+
+<% end %>

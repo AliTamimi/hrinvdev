@@ -1,0 +1,12 @@
+<h4>All Leave</h4>
+<%= link_to 'New Leave Type', new_leafe_path %><br>
+<% @leave_emp_history.each do |x| %>
+
+<td><%= x.employee.try(:name) %></td>
+<td><%= x.from_day %></td>
+<td><%= x.to_day %></td>
+<td><%= x.leave_status %></td>
+
+<br>
+
+<% end %>

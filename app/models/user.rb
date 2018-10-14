@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   belongs_to :employee, optional: true
-  ROLES = ['admin','Hr', 'Employee']
+  belongs_to :role 
+  ROLES = ['admin','Gm','Hr', 'Employee']
 end

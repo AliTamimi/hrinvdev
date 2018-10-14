@@ -1,0 +1,11 @@
+<h4>Leave Group</h4>
+<%= link_to 'New Leave Group', new_leave_group_path %><br>
+<% @leave_group.each do |x| %>
+
+<td><%= x.days %></td>
+<td><%= x.leave_type.try(:name) %></td>
+<td><%= x.position.try(:name) %></td>
+
+<br>
+
+<% end %>

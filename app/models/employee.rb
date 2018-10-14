@@ -6,6 +6,8 @@ class Employee < ApplicationRecord
     belongs_to :custom_repoter, class_name: "Position", :foreign_key => 'custom_report_to', optional: true
     has_one :user
     has_many :employee_histories
+    has_many :leave_group_employees
+    has_many :leave_emp_histories
     before_update :create_history
 
     def create_history

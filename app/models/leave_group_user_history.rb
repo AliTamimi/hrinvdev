@@ -1,0 +1,2 @@
+class LeaveGroupUserHistory < ApplicationRecord
+end

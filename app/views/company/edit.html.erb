@@ -1,0 +1,15 @@
+<%= form_for @company, url: {action: :update} do |f| %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label :code %>
+    <%= f.text_field :code %><br>
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

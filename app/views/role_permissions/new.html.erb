@@ -1,0 +1,27 @@
+<%= form_for @role_permission, url: {action: :create} do |f| %>
+
+  <div class="field">
+    <%= f.label :module_id %>
+    <%= f.select :module_id, options_for_select(RolePermission::MODULE.collect.with_index.to_a) %>
+
+    <%#= f.select :module_id, options_for_select(Role::MODULE.collect.with_index.to_a) %>
+    <%#= f.select :module_id, RolePermission::MODULE %><br>
+    <%= f.label :view %>
+    <%= f.check_box :view %><br>
+    <%= f.label :view_all %>
+    <%= f.check_box :view_all %><br>
+    <%= f.label :create_edit %>
+    <%= f.check_box :create_edit %><br>
+    <%= f.label :delete_access %>
+    <%= f.check_box :delete_access %><br>
+    <%= f.label :approve %>
+    <%= f.check_box :approve %><br>
+    <%= f.label :role_id %>
+     <%= f.collection_select :role_id, Role.all,:id,:name %><br>
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<h4>Roles</h4>
+<%= link_to 'New Role', new_role_path %><br>
+<% @role.each do |x| %>
+
+<td><%= x.name %></td>
+
+<br>
+
+<% end %>

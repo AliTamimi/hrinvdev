@@ -2,13 +2,15 @@
 <% if f.last_working_day.present? && f.last_working_day < Time.now %>
   <%= f.last_working_day %>
 <% end %>
- <% if f.user.present? &&  f.user.block_access.blank? %>
- <td><%= link_to 'Block Access', block_access_employee_path(f.id) %></td>
- <% elsif %>
- <td><%= link_to 'Enable Access', allow_access_employee_path(f.id) %></td>
- <% else %>
-          <td>&nbsp;&nbsp;</td>
-<% end %>
+
+ <%= f.user.try(:email) %>
+     <% if f.user.present? && f.user.block_access.blank? %>
+      <td><%= link_to 'Block access', block_access_employee_path(f) %></td>
+    <% elsif f.user.present? %>
+      <td><%= link_to 'Enable access', allow_access_employee_path(f) %></td>
+    <% else %>
+      <td>&nbsp;&nbsp;</td>
+    <% end %>
 <%= f.id %>
 <%= f.name %>
 <%= f.dob %>

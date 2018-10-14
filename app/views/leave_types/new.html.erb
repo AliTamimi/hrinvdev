@@ -1,0 +1,18 @@
+<%= form_for @leave_type, url: {action: :create} do |f| %>
+
+<div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label :detuct_from_annul %>
+    <%= f.check_box :detuct_from_annul %><br>
+    <%= f.label :weight %>
+    <%= f.text_field :weight %><br>
+    <%= f.label :max_days %>
+    <%= f.text_field :max_days %><br>
+    <%= f.label :max_apply %>
+    <%= f.text_field :max_apply %><br>
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

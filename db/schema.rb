@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_101944) do
+ActiveRecord::Schema.define(version: 2018_10_14_123551) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -59,6 +59,69 @@ ActiveRecord::Schema.define(version: 2018_10_07_101944) do
     t.index ["position_id"], name: "index_employees_on_position_id"
   end
 
+  create_table "leave_emp_histories", force: :cascade do |t|
+    t.integer "leave_group_employee_id"
+    t.date "from_day"
+    t.date "to_day"
+    t.integer "leave_status"
+    t.datetime "status_updated_at"
+    t.integer "approved_by"
+    t.integer "employee_id"
+    t.integer "leave_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_leave_emp_histories_on_employee_id"
+    t.index ["leave_group_employee_id"], name: "index_leave_emp_histories_on_leave_group_employee_id"
+    t.index ["leave_type_id"], name: "index_leave_emp_histories_on_leave_type_id"
+  end
+
+  create_table "leave_group_employee_histories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "leave_group_employees", force: :cascade do |t|
+    t.integer "employee_id"
+    t.float "leave_count", default: 0.0
+    t.integer "leave_type_id"
+    t.float "current_month_leave", default: 0.0
+    t.integer "current_month"
+    t.integer "carry_forward_leave", default: 0
+    t.integer "carry_forward_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_leave_group_employees_on_employee_id"
+    t.index ["leave_type_id"], name: "index_leave_group_employees_on_leave_type_id"
+  end
+
+  create_table "leave_group_user_histories", force: :cascade do |t|
+    t.integer "leave_group_employee_id"
+    t.date "date_of_leave"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leave_group_employee_id"], name: "index_leave_group_user_histories_on_leave_group_employee_id"
+  end
+
+  create_table "leave_groups", force: :cascade do |t|
+    t.float "days", default: 0.0
+    t.integer "leave_type_id"
+    t.integer "position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leave_type_id"], name: "index_leave_groups_on_leave_type_id"
+    t.index ["position_id"], name: "index_leave_groups_on_position_id"
+  end
+
+  create_table "leave_types", force: :cascade do |t|
+    t.string "name"
+    t.boolean "detuct_from_annul", default: true
+    t.float "weight", default: 0.0
+    t.float "max_days", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "max_apply", default: 1
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -67,6 +130,26 @@ ActiveRecord::Schema.define(version: 2018_10_07_101944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "higher_level", default: false
+  end
+
+  create_table "role_permissions", force: :cascade do |t|
+    t.integer "module_id"
+    t.boolean "view"
+    t.boolean "view_all"
+    t.boolean "create_edit"
+    t.boolean "delete_access"
+    t.boolean "approve"
+    t.integer "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_role_permissions_on_role_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.boolean "all_access"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
