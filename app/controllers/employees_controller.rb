@@ -68,9 +68,24 @@ class EmployeesController < ApplicationController
     
     def employee_info
         @employee = Employee.find_by(id: current_user.employee_id)
+
+        @leave_type = LeaveType.all
+
+        @applied_leave = current_user.employee.leave_emp_histories.where(leave_status: 0)
+
+        @approved_leave = current_user.employee.leave_emp_histories.where(leave_status: 2)
+
+
         redirect_to restrict_index_path if @employee.blank?
         
     end
+    def apply_leave
+       @leave_emp_history = LeaveEmpHistory.new 
+    end
+    def apply_leave_update
+        @leave_emp_history = LeaveEmpHistory.new(permit_params)
+        @leave_emp_history.save
+    end 
     private
     def set_employee
         @employee = Employee.find(params[:id])
@@ -81,5 +96,7 @@ class EmployeesController < ApplicationController
     def user_params
         params.require(:user).permit(:email, :password, :employee_id, :role_id)
     end
-
+    def permit_params
+      params.require(:leave_emp_history).permit(:employee_id, :from_day, :to_day, :leave_status, :leave_type_id)
+    end
 end

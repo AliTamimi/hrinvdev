@@ -1,6 +1,46 @@
 <h4>my info</h4>
+<%= link_to 'Apply for leave', apply_leave_employees_path %><br>
 <%= @employee.id %>
 <%= @employee.name%>
 <%= @employee.company.try(:name) %>
 <%= @employee.department.try(:name) %>
 <%= @employee.position.try(:name) %>
+
+<br>
+<% detuct_leave_type = LeaveType.where(detuct_from_annul: true).first %>
+<% lv_gp = LeaveGroupEmployee.where(leave_type_id: detuct_leave_type.id, employee_id: current_user.employee.id).first %>
+<% max_days = LeaveGroup.where(position_id: current_user.employee.position.id).first.days %>
+leave_balance = <%= lv_gp.present? ? (lv_gp.detuct_from_annul_balance.to_i + lv_gp.carry_leave.to_i) : max_days %>
+<br>
+
+<% @leave_type.each do |leave_type| %>
+name: <%= leave_type.name %>
+ <% leave_group_employee = LeaveGroupEmployee.where(employee_id: params[:id], leave_type: leave_type.id).first %>
+
+balance : <%= leave_type.detuct_from_annul ? (leave_group_employee.try(:carry_leave).to_i + leave_group_employee.try(:detuct_from_annul_leave).to_i) : (leave_type.max_days - (leave_group_employee.try(:leave_count).to_i + leave_group_employee.try(:applied_count).to_i)) %></td>
+
+<% end %>
+<br><br>
+
+<% @applied_leave.each do |x| %>
+
+<td><%= x.leave_type.try(:name) %></td>
+<td><%= x.from_day %></td>
+<td><%= x.to_day %></td>
+<td><%= x.leave_status %></td>
+<td>waiting approval </td>
+<br>
+
+<% end %>
+
+<br><br>
+<% @approved_leave.each do |x| %>
+
+<td><%= x.leave_type.try(:name) %></td>
+<td><%= x.from_day %></td>
+<td><%= x.to_day %></td>
+<td><%= x.leave_status %></td>
+<td>Approved </td>
+<br>
+
+<% end %>

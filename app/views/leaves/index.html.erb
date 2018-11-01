@@ -1,12 +1,19 @@
 <h4>All Leave</h4>
-<%= link_to 'New Leave Type', new_leafe_path %><br>
+<%= link_to 'Apply for Leave', new_leafe_path %><br>
 <% @leave_emp_history.each do |x| %>
 
 <td><%= x.employee.try(:name) %></td>
+<td><%= x.leave_type.try(:name) %></td>
 <td><%= x.from_day %></td>
 <td><%= x.to_day %></td>
 <td><%= x.leave_status %></td>
-
+<td><%= link_to 'Approve', approve_leafe_path(x.id) %></td>
+<td><%= link_to 'Reject', reject_leafe_path(x.id) %></td>
+<td>leave Type: <%= x.leave_type.name %></td>
+ <td>Total Approved: <%#= x.leave_group_employee.try(:leave_count) %></td>
+ <td>Total Applied: <%#= x.leave_group_employee.try(:applied_count) %></td>
+ <td>Leave balance: <%= x.leave_type.detuct_from_annul ? "-" : (x.leave_type.max_days - (x.leave_group_employee.try(:leave_count).to_i + x.leave_group_employee.try(:applied_count).to_i)) %></td>
+<td>Leave balance: <%= x.leave_type.detuct_from_annul ? (x.carry_leave + x.detuct_from_annul_balance) : (x.leave_type.max_days - (x.leave_group_employee.try(:leave_count).to_i + x.leave_group_employee.try(:applied_count).to_i)) %></td>
 <br>
 
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_14_123551) do
+ActiveRecord::Schema.define(version: 2018_10_16_162312) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_123551) do
     t.integer "carry_forward_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "applied_count", default: 0.0
     t.index ["employee_id"], name: "index_leave_group_employees_on_employee_id"
     t.index ["leave_type_id"], name: "index_leave_group_employees_on_leave_type_id"
   end

@@ -2,6 +2,7 @@
 <%= link_to 'New Role', new_role_permission_path %><br>
 <% @role_permission.each do |x| %>
 
+<td><%= x.role.try(:name) %></td>
 <td><%= x.module_id %></td>
 <td><%= x.view %></td>
 <td><%= x.view_all %></td>

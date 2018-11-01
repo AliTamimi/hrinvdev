@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   resources :role_permissions
   resources :leave_types
   resources :leave_groups
-  resources :leaves, only: [:index, :new,:create]
+  resources :leaves, only: [:index, :new,:create] do
+    member do
+      get 'approve'
+      get 'reject'
+    end
+  end
   resources :employees do
     member do
     get 'new_access'
@@ -21,6 +26,8 @@ Rails.application.routes.draw do
     end
     collection do
       get 'employee_info'
+      get 'apply_leave'
+      post 'apply_leave_update'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

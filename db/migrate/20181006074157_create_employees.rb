@@ -2,6 +2,8 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
   def change
     create_table :employees do |t|
       execute('insert into sqlite_sequence(name,seq) values(\'employees\', 1000);')
+      # for Postgres
+      #execute("SELECT setval('employee_id_seq', 1000)") 
       t.string :name, index: true
       t.string :nationality
       t.date :dob
@@ -15,5 +17,6 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    #execute "SELECT setval('employee_id_seq', 1000)"
   end
 end
